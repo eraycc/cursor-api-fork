@@ -57,9 +57,9 @@ npm run start
    - 调整git项目：
 如果你fork了项目，可以在Dockerfile中调整git地址，调整为你的git地址
    - 调整接口地址：
-   因为huggingface的限制，似乎无法直接访问`/v1/chat/completions`，所以在dockerfile中将接口调整为`/proxy/v1/chat/completions`。你可以根据需要调整。
+   因为huggingface的限制，无法直接访问`/v1/`可以将全部v1进行替换，所以在dockerfile中将接口调整为`/hf/v1/`。你可以根据需要调整。
    ```
-   RUN sed -i 's/\/v1\/chat\/completions/\/proxy\/v1\/chat\/completions/g' src/index.js
+   RUN sed -i 's|/v1/|/hf/v1/|g' src/index.js
    ```
 
 2. 配置环境变量（一定要配置，一直随机会封号24小时）
@@ -76,12 +76,12 @@ npm run start
 
    Hugging Face Spaces的接口地址命名规则：
    ```
-   {username}-{space-name}.hf.space
+   {username}-{space-name}.hf.space/hf
     ```
    
    举例：如果用户名是test，空间名是cursor，则接口地址为：
    ```
-   https://test-cursor.hf.space/v1/models
+   https://test-cursor.hf.space/hf/v1/models
    ```
 
 ## 注意事项
